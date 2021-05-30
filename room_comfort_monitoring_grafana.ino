@@ -1,6 +1,7 @@
 #include <Arduino.h>
+#include <ArduinoBearSSL.h>
+#include <PromLokiTransport.h>
 #include <Prometheus.h>
-#include <bearssl_x509.h>
 #include <DHT.h>
 
 #include "certificates.h"
@@ -9,37 +10,45 @@
 // DHT Sensor
 DHT dht(DHTPIN, DHTTYPE);
 
-// Prometheus client
-Prometheus client;
-// Create a write request for 3 series
-WriteRequest req(3, 768);
+// Prometheus client and transport
+PromLokiTransport transport;
+PromClient client(transport);
 
-// Create a labelset arrays for the 2 labels that is going to be used for all series
-LabelSet label_set[] = {{ "monitoring_type", "weather" }, { "board_type", "esp32-devkit1" }};
+// Create a write request for 3 series
+WriteRequest req(3, 1537);
 
 // Define a TimeSeries which can hold up to 5 samples, has a name of `temperature/humidity/...` and uses the above labels of which there are 2
-TimeSeries ts1(5, "temperature_celsius", label_set, 2);
-TimeSeries ts2(5, "humidity_percent", label_set, 2);
-TimeSeries ts3(5, "heat_index_celsius", label_set, 2);
+TimeSeries ts1(5, "temperature_celsius", "monitoring_type=\"room\",board_type=\"esp32-devkit1\",room=\"bedroom\"");
+TimeSeries ts2(5, "humidity_percent",  "monitoring_type=\"room\",board_type=\"esp32-devkit1\",room=\"bedroom\"");
+TimeSeries ts3(5, "heat_index_celsius",  "monitoring_type=\"room\",board_type=\"esp32-devkit1\",room=\"bedroom\"");
 
 int loopCounter = 0;
 
 // Function to set up Prometheus client
 void setupClient() {
   Serial.println("Setting up client...");
+  
+  // Configure and start the transport layer
+  transport.setUseTls(true);
+  transport.setCerts(TAs, TAs_NUM);
+  transport.setWifiSsid(WIFI_SSID);
+  transport.setWifiPass(WIFI_PASSWORD);
+  transport.setDebug(Serial);  // Remove this line to disable debug logging of the client.
+  if (!transport.begin()) {
+      Serial.println(transport.errmsg);
+      while (true) {};
+  }
+
   // Configure the client
-  client.setUrl(GC_URL);
-  client.setPath(GC_PATH);
+  client.setUrl(GC_PROM_URL);
+  client.setPath(GC_PROM_PATH);
   client.setPort(GC_PORT);
-  client.setUser(GC_USER);
-  client.setPass(GC_PASS);
-  client.setUseTls(true);
-  client.setCerts(TAs, TAs_NUM);
-  client.setWifiSsid(WIFI_SSID);
-  client.setWifiPass(WIFI_PASSWORD);
+  client.setUser(GC_PROM_USER);
+  client.setPass(GC_PROM_PASS);
   client.setDebug(Serial);  // Remove this line to disable debug logging of the client.
-  if (!client.begin()){
+  if (!client.begin()) {
       Serial.println(client.errmsg);
+      while (true) {};
   }
 
   // Add our TimeSeries to the WriteRequest
@@ -67,7 +76,7 @@ void setup() {
 // LOOP: Function called in a loop to read from sensors and send them do databases
 void loop() {
   int64_t time;
-  time = client.getTimeMillis();
+  time = transport.getTimeMillis();
 
   // Read temperature and humidity
   float hum = dht.readHumidity();
@@ -85,9 +94,11 @@ void loop() {
   if (loopCounter >= 5) {
     //Send
     loopCounter = 0;
-    if (!client.send(req)) {
-      Serial.println(client.errmsg);
+    PromClient::SendResult res = client.send(req);
+    if (!res == PromClient::SendResult::SUCCESS) {
+            Serial.println(client.errmsg);
     }
+    
     // Reset batches after a succesful send.
     ts1.resetSamples();
     ts2.resetSamples();
@@ -107,4 +118,6 @@ void loop() {
   // wait INTERVAL seconds and then do it again
   delay(INTERVAL * 1000);
 }
+
+
 
