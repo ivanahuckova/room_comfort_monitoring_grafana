@@ -1,4 +1,4 @@
-# (WIP) Weather monitoring with Grafana stack
+# (WIP) Room confort monitoring with Grafana stack
 
 The weather monitoring let's you see the current and previous temperature and humidity data of your room (or any place you set up monitoring in). This project was part of **[GrafanaCONline 2021 Easy DIY IoT projects with Grafana](https://grafana.com/go/grafanaconline/2021/diy-iot/)** session.
 
