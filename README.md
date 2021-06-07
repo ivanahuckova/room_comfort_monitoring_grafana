@@ -1,8 +1,12 @@
-# (WIP) Room confort monitoring with Grafana stack
+# Room confort monitoring with Arduino and Grafana
 
-The weather monitoring let's you see the current and previous temperature and humidity data of your room (or any place you set up monitoring in). This project was part of **[GrafanaCONline 2021 Easy DIY IoT projects with Grafana](https://grafana.com/go/grafanaconline/2021/diy-iot/)** session.
+The room confort monitoring let's you see the current and previous temperature and humidity data of your room (or any place you set up monitoring in). This project was part of **[GrafanaCONline 2021 Easy DIY IoT projects with Grafana](https://grafana.com/go/grafanaconline/2021/diy-iot/)** session.
 
 <img src="imgs/monitor.jpg" width="700" title="Image of how the system looks">
+
+## Arduino & Grafana
+
+To start review the **[Grafana DIY IoT](https://github.com/grafana/diy-iot/blob/main/README.md)
 
 ## Hardware
 
@@ -18,20 +22,23 @@ To build this system, you will need:
 
 ## Libraries:
 
+In Arduino IDE, download following libraries: 
+
 - **DHT sensor library by** Adafruit
 - **Adafruit Unified Sensor** by Adafruit
 - **NTP Client** by Fabrice Weinberg
-- **Loki** *needs to be added*
-- **Prometheus/Cortex** *needs to be added*
+- **Loki** 
+- **Prometheus**
 
 
 ## Circuit & Wiring diagrams
 
 <img src="imgs/wire_diagram.png" width="700" title="Wire diagram">
 
-## Data storage and visualisation
+## Software
 
-We are using free tier of [Grafana Cloud](https://grafana.com/products/cloud/) that comes with hosted [Loki](https://grafana.com/oss/loki/) (logs), [Prometheus](https://grafana.com/oss/prometheus/) (metrics) and [Grafana](https://grafana.com/oss/grafana/) (visualisation). As soon as your account is all set up, you can see the portal with the hosted Grafana, Loki, and Prometheus instances. Created API keys for Loki and Prometheus to publish metrics from the monitoring system to these databases. Update API keys in the config file.
+Download this repo that includes the software for room comfort monitoring. Update **config.h** file with your names, passwords and API keys. Upload software to your board using Arduino IDE.
+
 
 
 
