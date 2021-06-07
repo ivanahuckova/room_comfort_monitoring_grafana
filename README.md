@@ -26,10 +26,6 @@ In Arduino IDE, download following libraries:
 
 - **DHT sensor library by** Adafruit
 - **Adafruit Unified Sensor** by Adafruit
-- **NTP Client** by Fabrice Weinberg
-- **Loki** 
-- **Prometheus**
-
 
 ## Circuit & Wiring diagrams
 
