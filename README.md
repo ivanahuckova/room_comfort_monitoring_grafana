@@ -6,7 +6,7 @@ The room confort monitoring let's you see the current and previous temperature a
 
 ## Arduino & Grafana
 
-To start review the **[Grafana DIY IoT](https://github.com/grafana/diy-iot/blob/main/README.md)
+To start, review the **[Grafana DIY IoT](https://github.com/grafana/diy-iot/blob/main/README.md)**.
 
 ## Hardware
 
@@ -38,7 +38,3 @@ In Arduino IDE, download following libraries:
 ## Software
 
 Download this repo that includes the software for room comfort monitoring. Update **config.h** file with your names, passwords and API keys. Upload software to your board using Arduino IDE.
-
-
-
-
