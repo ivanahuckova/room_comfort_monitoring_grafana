@@ -6,7 +6,7 @@ The room confort monitoring let's you see the current and previous temperature a
 
 ## Arduino & Grafana
 
-To start, review the **[Grafana DIY IoT](https://github.com/grafana/diy-iot/blob/main/README.md)**.
+To start, review and follow steps in the **[Grafana DIY IoT repo](https://github.com/grafana/diy-iot)**.
 
 ## Hardware
 
