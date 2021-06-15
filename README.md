@@ -20,10 +20,11 @@ To build this system, you will need:
 
 - **DHT sensor library by** Adafruit
 - **Adafruit Unified Sensor** by Adafruit
-- **NTP Client** by Fabrice Weinberg
-- **Loki** *needs to be added*
-- **Prometheus/Cortex** *needs to be added*
-
+- **ArduinoBearSSL** by Arduino
+- **ArduinoHttpClient** by Arduino
+- **PrometheusArduino** by Ed Welch
+- **PromLokiTransport** by Ed Welch
+- **SnappyProto** by Ed Welch
 
 ## Circuit & Wiring diagrams
 
@@ -32,6 +33,3 @@ To build this system, you will need:
 ## Data storage and visualisation
 
 We are using free tier of [Grafana Cloud](https://grafana.com/products/cloud/) that comes with hosted [Loki](https://grafana.com/oss/loki/) (logs), [Prometheus](https://grafana.com/oss/prometheus/) (metrics) and [Grafana](https://grafana.com/oss/grafana/) (visualisation). As soon as your account is all set up, you can see the portal with the hosted Grafana, Loki, and Prometheus instances. Created API keys for Loki and Prometheus to publish metrics from the monitoring system to these databases. Update API keys in the config file.
-
-
-
