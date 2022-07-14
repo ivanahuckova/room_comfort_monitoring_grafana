@@ -13,7 +13,7 @@ DHT dht(DHTPIN, DHTTYPE);
 PromLokiTransport transport;
 PromClient client(transport);
 
-// Create a write request for 3 series
+// Create a write request for 3 series (when changing update buffers used to serialize the data)
 WriteRequest req(3, 1537);
 
 // Define a TimeSeries which can hold up to 5 samples, has a name of `temperature/humidity/...` and uses the above labels of which there are 2
