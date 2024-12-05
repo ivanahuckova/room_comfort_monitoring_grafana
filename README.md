@@ -39,3 +39,10 @@ In Arduino IDE, download following libraries:
 ## Software
 
 Download this repo that includes the software for room comfort monitoring. Update **config.h** file with your names, passwords and API keys. Upload software to your board using Arduino IDE.
+
+## Grafana Dashboard
+
+An example Grafana dashboard is available import in the [examples](examples/temperature_and_humidity.json) directory.
+Go to your Grafana home page > Dashboards > New > Import and upload or paste the JSON file.Select the Prometheus data source, e.g. `grafanacloud-NAME-prom`.
+
+<img src="imgs/dashboard.png" width="700" title="Grafana temperature and humidity dashboard">
