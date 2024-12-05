@@ -43,6 +43,6 @@ Download this repo that includes the software for room comfort monitoring. Updat
 ## Grafana Dashboard
 
 An example Grafana dashboard is available import in the [examples](examples/temperature_and_humidity.json) directory.
-Go to your Grafana home page > Dashboards > New > Import and upload or paste the JSON file.Select the Prometheus data source, e.g. `grafanacloud-NAME-prom`.
+Go to your Grafana home page > Dashboards > New > Import and upload or paste the JSON file. Select the Prometheus data source, e.g. `grafanacloud-NAME-prom`.
 
 <img src="imgs/dashboard.png" width="700" title="Grafana temperature and humidity dashboard">
